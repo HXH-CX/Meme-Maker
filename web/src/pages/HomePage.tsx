@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import type { MemeSource, Template, TemplateCategory } from '../types'
 import { CATEGORIES } from '../types'
 import TemplateGrid from '../components/TemplateGrid'
+import UploadTile from '../components/UploadTile'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -10,6 +11,7 @@ export default function HomePage() {
   const [loadError, setLoadError] = useState(false)
   const [category, setCategory] = useState<TemplateCategory | '全部'>('全部')
   const [keyword, setKeyword] = useState('')
+  const [uploadError, setUploadError] = useState('')
 
   useEffect(() => {
     fetch('/templates/manifest.json')
@@ -35,6 +37,12 @@ export default function HomePage() {
 
   const openEditor = (template: Template) => {
     const source: MemeSource = { kind: 'template', template }
+    navigate('/editor', { state: { source } })
+  }
+
+  const openUpload = (dataUrl: string) => {
+    setUploadError('')
+    const source: MemeSource = { kind: 'upload', dataUrl }
     navigate('/editor', { state: { source } })
   }
 
@@ -68,6 +76,15 @@ export default function HomePage() {
             placeholder="搜索模板…"
             className="rounded-full border border-amber-200 bg-white px-4 py-1.5 text-sm outline-none focus:border-amber-400 sm:w-52"
           />
+        </div>
+
+        <div className="mt-6">
+          <UploadTile onLoaded={openUpload} onError={setUploadError} />
+          {uploadError && (
+            <p className="mt-2 rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {uploadError}
+            </p>
+          )}
         </div>
 
         <div className="mt-6">
