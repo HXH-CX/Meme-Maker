@@ -5,6 +5,7 @@ import { CATEGORIES } from '../types'
 import TemplateGrid from '../components/TemplateGrid'
 import UploadTile from '../components/UploadTile'
 import AiPanel from '../components/AiPanel'
+import HistoryStrip from '../components/HistoryStrip'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -89,6 +90,8 @@ export default function HomePage() {
         </div>
 
         <AiPanel />
+
+        <HistoryStrip />
 
         <div className="mt-6">
           {loadError ? (

@@ -4,6 +4,7 @@ import type { MemeSource, TextLayer } from '../types'
 import { TEXT_COLORS } from '../types'
 import { drawMeme } from '../lib/render'
 import { canCopyImage, copyCanvas, downloadCanvas } from '../lib/export'
+import { makeBaseDataUrl, saveToHistory } from '../lib/history'
 import TextControls from '../components/TextControls'
 
 function sourceUrl(source: MemeSource): string {
@@ -25,13 +26,14 @@ const initialLayers: TextLayer[] = [
 export default function EditorPage() {
   const location = useLocation()
   const navigate = useNavigate()
-  const source = (location.state as { source?: MemeSource } | null)?.source
+  const state = location.state as { source?: MemeSource; layers?: TextLayer[] } | null
+  const source = state?.source
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [image, setImage] = useState<HTMLImageElement | null>(null)
   const [imageError, setImageError] = useState(false)
   const [fontsReady, setFontsReady] = useState(false)
-  const [layers, setLayers] = useState<TextLayer[]>(initialLayers)
+  const [layers, setLayers] = useState<TextLayer[]>(state?.layers ?? initialLayers)
   const [copied, setCopied] = useState(false)
   const [notice, setNotice] = useState('')
 
@@ -59,9 +61,20 @@ export default function EditorPage() {
     setLayers((prev) => prev.map((l, i) => (i === index ? layer : l)))
   }
 
+  const saveWork = () => {
+    if (image) saveToHistory(makeBaseDataUrl(image), layers)
+  }
+
+  const handleDownload = () => {
+    if (!canvasRef.current) return
+    saveWork()
+    downloadCanvas(canvasRef.current)
+  }
+
   const handleCopy = async () => {
     if (!canvasRef.current) return
     setNotice('')
+    saveWork()
     try {
       await copyCanvas(canvasRef.current)
       setCopied(true)
@@ -104,7 +117,7 @@ export default function EditorPage() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => canvasRef.current && downloadCanvas(canvasRef.current)}
+              onClick={handleDownload}
               disabled={!image}
               className="flex-1 rounded-xl bg-amber-500 py-2.5 text-white transition hover:bg-amber-600 disabled:opacity-50"
             >

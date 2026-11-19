@@ -125,7 +125,15 @@ DashScope **原生异步任务**接口（实测 compatible-mode 无 images 路�
 - 简易防护：按 IP 内存限流（10 次/分钟）；不做持久化。
 - 图片代理白名单：仅 `https://*.aliyuncs.com`；生成图不落盘，仅内存转发。
 
-### 5.4 模板素材管线
+### 5.4 最近作品历史（v1.1）
+
+- 触发点：编辑器下载/复制时 `saveToHistory(makeBaseDataUrl(image), layers)`。
+- 存储：localStorage 单键 `meme-maker-history`，条目 `{id, savedAt, base(短边512 JPEG dataURL), layers}`，上限 12 条倒序淘汰。
+- 配额兜底：setItem 抛错时丢弃最旧 3 条重试一次，仍失败静默放弃。
+- 恢复：历史条点击 → `/editor` state `{source:{kind:'upload',dataUrl:base}, layers}`，编辑器初始 layers 取自 state。
+- 缩略图分辨率与导出画布一致（短边 512），重编辑不损失导出精度。
+
+### 5.5 模板素材管线
 
 - `manifest.json` 为唯一模板数据源，新增模板 = 放图 + 加一条记录。
 - 首批 ≥12 张：开源可商用素材 + 通义万相自制（M3 联调时顺便产出），每张记录 `credit`。

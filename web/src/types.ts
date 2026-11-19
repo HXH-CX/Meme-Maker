@@ -26,6 +26,13 @@ export type MemeSource =
 
 export type AiStyle = 'meme' | 'sticker'
 
+export interface HistoryEntry {
+  id: string
+  savedAt: number
+  base: string
+  layers: TextLayer[]
+}
+
 export const TEXT_COLORS = [
   '#1a1a1a',
   '#ffffff',
