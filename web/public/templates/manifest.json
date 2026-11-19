@@ -32,70 +32,6 @@
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
-    "id": "smile",
-    "name": "微笑黄豆",
-    "file": "/templates/smile.svg",
-    "category": "可爱贴纸",
-    "tags": ["微笑", "开心", "黄豆", "表情"],
-    "credit": "自制 SVG（本项目资产）"
-  },
-  {
-    "id": "heart-eyes",
-    "name": "爱心眼",
-    "file": "/templates/heart-eyes.svg",
-    "category": "可爱贴纸",
-    "tags": ["爱心", "喜欢", "花痴", "黄豆"],
-    "credit": "自制 SVG（本项目资产）"
-  },
-  {
-    "id": "line-puppy",
-    "name": "线条小狗",
-    "file": "/templates/line-puppy.png",
-    "category": "动物",
-    "tags": ["线条小狗", "狗", "简笔画", "面瘫"],
-    "credit": "自制（AI 生成，本项目资产）"
-  },
-  {
-    "id": "lying-flat-cat",
-    "name": "躺平橘猫",
-    "file": "/templates/lying-flat-cat.png",
-    "category": "动物",
-    "tags": ["猫", "躺平", "摆烂", "累", "橘猫"],
-    "credit": "自制（AI 生成，本项目资产）"
-  },
-  {
-    "id": "crying-cat",
-    "name": "流泪猫猫头",
-    "file": "/templates/crying-cat.png",
-    "category": "情绪",
-    "tags": ["猫", "哭", "流泪", "委屈", "猫猫头"],
-    "credit": "自制（AI 生成，本项目资产）"
-  },
-  {
-    "id": "stickman-rage",
-    "name": "暴走简笔画",
-    "file": "/templates/stickman-rage.png",
-    "category": "情绪",
-    "tags": ["简笔画", "暴走", "愤怒", "抽象", "小人"],
-    "credit": "自制（AI 生成，本项目资产）"
-  },
-  {
-    "id": "angry",
-    "name": "怒火中烧",
-    "file": "/templates/angry.svg",
-    "category": "情绪",
-    "tags": ["生气", "愤怒", "火大", "黄豆"],
-    "credit": "自制 SVG（本项目资产）"
-  },
-  {
-    "id": "cry",
-    "name": "泪流满面",
-    "file": "/templates/cry.svg",
-    "category": "情绪",
-    "tags": ["哭", "流泪", "委屈", "黄豆"],
-    "credit": "自制 SVG（本项目资产）"
-  },
-  {
     "id": "panda-confused",
     "name": "熊猫头疑惑",
     "file": "/templates/panda-confused.png",
@@ -128,20 +64,44 @@
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
-    "id": "smirk-sideeye",
-    "name": "斜眼笑",
-    "file": "/templates/smirk-sideeye.svg",
-    "category": "可爱贴纸",
-    "tags": ["斜眼", "笑", "滑稽", "嘲讽", "黄豆"],
-    "credit": "自制 SVG（本项目资产）"
+    "id": "raccoon-melon",
+    "name": "浣熊吃瓜",
+    "file": "/templates/raccoon-melon.png",
+    "category": "斗图经典",
+    "tags": ["浣熊", "吃瓜", "围观", "看戏", "西瓜"],
+    "credit": "自制（AI 生成，本项目资产）"
   },
   {
-    "id": "sweat-smile",
-    "name": "流汗微笑",
-    "file": "/templates/sweat-smile.svg",
+    "id": "cat-thumbsup",
+    "name": "猫猫点赞",
+    "file": "/templates/cat-thumbsup.png",
+    "category": "斗图经典",
+    "tags": ["猫", "点赞", "好的", "敷衍", "表扬"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "line-puppy",
+    "name": "线条小狗",
+    "file": "/templates/line-puppy.png",
     "category": "可爱贴纸",
-    "tags": ["流汗", "尴尬", "微笑", "黄豆", "无语"],
-    "credit": "自制 SVG（本项目资产）"
+    "tags": ["线条小狗", "狗", "简笔画", "面瘫"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "seal-clap",
+    "name": "海豹鼓掌",
+    "file": "/templates/seal-clap.png",
+    "category": "可爱贴纸",
+    "tags": ["海豹", "鼓掌", "开心", "大笑", "喝彩"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "lying-flat-cat",
+    "name": "躺平橘猫",
+    "file": "/templates/lying-flat-cat.png",
+    "category": "动物",
+    "tags": ["猫", "躺平", "摆烂", "累", "橘猫"],
+    "credit": "自制（AI 生成，本项目资产）"
   },
   {
     "id": "capybara-onsen",
@@ -168,11 +128,51 @@
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
+    "id": "goose-chase",
+    "name": "村霸鹅追人",
+    "file": "/templates/goose-chase.png",
+    "category": "动物",
+    "tags": ["鹅", "村霸", "追人", "凶", "搞笑"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "sloth-slow",
+    "name": "树懒慢半拍",
+    "file": "/templates/sloth-slow.png",
+    "category": "动物",
+    "tags": ["树懒", "慢", "淡定", "反射弧", "微笑"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "crying-cat",
+    "name": "流泪猫猫头",
+    "file": "/templates/crying-cat.png",
+    "category": "情绪",
+    "tags": ["猫", "哭", "流泪", "委屈", "猫猫头"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "stickman-rage",
+    "name": "暴走简笔画",
+    "file": "/templates/stickman-rage.png",
+    "category": "情绪",
+    "tags": ["简笔画", "暴走", "愤怒", "抽象", "小人"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
     "id": "clown-sad",
     "name": "小丑竟是我自己",
     "file": "/templates/clown-sad.png",
     "category": "情绪",
     "tags": ["小丑", "自嘲", "流泪", "微笑", "破防"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "marmot-scream",
+    "name": "尖叫土拨鼠",
+    "file": "/templates/marmot-scream.png",
+    "category": "情绪",
+    "tags": ["土拨鼠", "尖叫", "震惊", "啊", "崩溃"],
     "credit": "自制（AI 生成，本项目资产）"
   }
 ]
