@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import { fetchImage, getTask, isAllowedImageUrl, submitEditTask, submitTask } from './dashscope'
+import { failCode, withRetry } from './errors'
 import { STYLE_PREFIX, validateGenerateBody, validateVariationBody, VARIATION_DIMENSIONS, VARIATION_PRESETS } from './validate'
 
 const app = express()
@@ -24,13 +25,6 @@ function rateLimited(ip: string): boolean {
   return false
 }
 
-function failCode(code: string | undefined, message: string | undefined): string {
-  if (code === 'DataInspectionFailed') return '内容未通过安全审核，请换一句描述'
-  if (code === 'Throttling' || code === 'AllocationQuotaExceeded')
-    return '生成额度不足或请求过频，请稍后再试'
-  return message ?? '生成失败，请重试'
-}
-
 app.get('/api/status', (_req, res) => {
   res.json({ aiEnabled: KEY.length > 0 })
 })
@@ -50,7 +44,7 @@ app.post('/api/generate', async (req, res) => {
     return
   }
   try {
-    const taskId = await submitTask(KEY, STYLE_PREFIX[parsed.style] + parsed.prompt)
+    const taskId = await withRetry(() => submitTask(KEY, STYLE_PREFIX[parsed.style] + parsed.prompt))
     res.status(202).json({ taskId })
   } catch (e) {
     const err = e as { code?: string; message?: string }
@@ -73,16 +67,20 @@ app.post('/api/variations', async (req, res) => {
     return
   }
   try {
-    const taskIds = await Promise.all(
-      VARIATION_DIMENSIONS.map((dim) =>
+    const tasks: { taskId: string; dimension: string }[] = []
+    for (const dim of VARIATION_DIMENSIONS) {
+      const taskId = await withRetry(() =>
         submitEditTask(
           KEY,
           parsed.image,
           VARIATION_PRESETS[dim] + (parsed.prompt ? `；补充要求：${parsed.prompt}` : ''),
         ),
-      ),
-    )
-    res.status(202).json({ tasks: taskIds.map((id, i) => ({ taskId: id, dimension: VARIATION_DIMENSIONS[i] })) })
+      )
+      tasks.push({ taskId, dimension: dim })
+      // 间隔提交，避免瞬时并发触发厂商 QPS 限流
+      await new Promise((r) => setTimeout(r, 1200))
+    }
+    res.status(202).json({ tasks })
   } catch (e) {
     const err = e as { code?: string; message?: string }
     res.status(502).json({ code: err.code ?? 'SUBMIT_FAILED', message: failCode(err.code, err.message) })
