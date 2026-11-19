@@ -61,14 +61,16 @@ export default function EditorPage() {
 
   const handleCopy = async () => {
     if (!canvasRef.current) return
+    setNotice('')
     try {
       await copyCanvas(canvasRef.current)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
       await downloadCanvas(canvasRef.current)
-      setNotice('当前浏览器不支持复制，已改为下载')
-      setTimeout(() => setNotice(''), 3000)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+      setNotice('复制被浏览器拒绝，已改为下载 PNG；可将下载的图片粘贴或发送进聊天框')
     }
   }
 
@@ -114,11 +116,15 @@ export default function EditorPage() {
                 disabled={!image}
                 className="flex-1 rounded-xl bg-white py-2.5 text-amber-600 shadow-sm transition hover:bg-amber-100 disabled:opacity-50"
               >
-                {copied ? '已复制 ✓' : '复制图片'}
+                {copied ? (notice ? '已下载 ✓' : '已复制 ✓') : '复制图片'}
               </button>
             )}
           </div>
-          {notice && <p className="text-center text-sm text-amber-700">{notice}</p>}
+          {notice && (
+            <p className="rounded-lg border border-amber-300 bg-amber-100 px-3 py-2 text-sm text-amber-800">
+              {notice}
+            </p>
+          )}
         </div>
       </main>
     </div>
