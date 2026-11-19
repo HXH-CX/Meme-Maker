@@ -3,15 +3,17 @@
   "private": true,
   "version": "0.1.0",
   "workspaces": [
-    "web"
+    "web",
+    "server"
   ],
   "scripts": {
-    "dev": "npm run dev -w web",
+    "dev": "concurrently -n web,server -c yellow,blue \"npm run dev -w web\" \"npm run dev -w server\"",
     "dev:web": "npm run dev -w web",
-    "test": "npm test -w web",
-    "build": "npm run build -w web"
+    "test": "npm test -w web && npm test -w server",
+    "build": "npm run build -w web && npm run build -w server"
   },
   "devDependencies": {
+    "concurrently": "^9.1.0",
     "sharp": "^0.35.5"
   }
 }

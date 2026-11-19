@@ -24,6 +24,8 @@ export type MemeSource =
   | { kind: 'upload'; dataUrl: string }
   | { kind: 'ai'; imageUrl: string; prompt: string }
 
+export type AiStyle = 'meme' | 'sticker'
+
 export const TEXT_COLORS = [
   '#1a1a1a',
   '#ffffff',

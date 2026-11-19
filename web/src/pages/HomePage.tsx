@@ -4,6 +4,7 @@ import type { MemeSource, Template, TemplateCategory } from '../types'
 import { CATEGORIES } from '../types'
 import TemplateGrid from '../components/TemplateGrid'
 import UploadTile from '../components/UploadTile'
+import AiPanel from '../components/AiPanel'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -86,6 +87,8 @@ export default function HomePage() {
             </p>
           )}
         </div>
+
+        <AiPanel />
 
         <div className="mt-6">
           {loadError ? (
