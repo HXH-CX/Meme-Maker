@@ -22,6 +22,6 @@ export function canCopyImage(): boolean {
 }
 
 export async function copyCanvas(canvas: HTMLCanvasElement) {
-  const blob = await canvasToBlob(canvas)
-  await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+  // blob 以 Promise 传入，保证 write 在点击的用户激活窗口内同步发起
+  await navigator.clipboard.write([new ClipboardItem({ 'image/png': canvasToBlob(canvas) })])
 }

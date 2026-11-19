@@ -33,6 +33,7 @@ export default function EditorPage() {
   const [fontsReady, setFontsReady] = useState(false)
   const [layers, setLayers] = useState<TextLayer[]>(initialLayers)
   const [copied, setCopied] = useState(false)
+  const [notice, setNotice] = useState('')
 
   useEffect(() => {
     document.fonts.load('16px "ZCOOL KuaiLe"').then(() => setFontsReady(true))
@@ -65,7 +66,9 @@ export default function EditorPage() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      alert('复制失败，请使用下载')
+      await downloadCanvas(canvasRef.current)
+      setNotice('当前浏览器不支持复制，已改为下载')
+      setTimeout(() => setNotice(''), 3000)
     }
   }
 
@@ -115,6 +118,7 @@ export default function EditorPage() {
               </button>
             )}
           </div>
+          {notice && <p className="text-center text-sm text-amber-700">{notice}</p>}
         </div>
       </main>
     </div>

@@ -95,7 +95,7 @@ type MemeSource =
 2. `textLayout`：按画布宽度贪心换行（中文按字、英文按词）；若行数 × 行高超出预留区（上/下各 ~30% 高度），逐级降字号直到放得下。
 3. 描边规则：浅色字配黑描边、深色字配白描边（按颜色亮度判断），`lineWidth ≈ fontSize/8`，`strokeText` 后再 `fillText`。
 4. 字体：默认「站酷快乐体」（OFL 开源，斗图气质），备选思源黑体；渲染前 `await document.fonts.ready`，避免字体未加载就画。
-5. 导出：`canvas.toBlob('image/png')` → `<a download>`；复制：`navigator.clipboard.write([new ClipboardItem({'image/png': blob})])`，不支持时隐藏按钮。
+5. 导出：`canvas.toBlob('image/png')` → `<a download>`；复制：`navigator.clipboard.write([new ClipboardItem({'image/png': blobPromise})])`（blob 以 Promise 传入，保住用户激活窗口）；写入失败自动降级下载 + inline 提示；ClipboardItem 不可用时隐藏复制按钮。
 
 ### 5.2 上传（M2）
 
