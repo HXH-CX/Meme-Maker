@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "ZCOOL KuaiLe";
+  src: url("/fonts/ZCOOLKuaiLe-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+body {
+  font-family: "ZCOOL KuaiLe", "PingFang SC", "Microsoft YaHei", sans-serif;
+}

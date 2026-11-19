@@ -1,0 +1,98 @@
+[
+  {
+    "id": "panda-smug",
+    "name": "得意熊猫",
+    "file": "/templates/panda-smug.png",
+    "category": "斗图经典",
+    "tags": ["熊猫", "得意", "嘲讽", "黑白"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "doge-sideeye",
+    "name": "斜眼狗头",
+    "file": "/templates/doge-sideeye.png",
+    "category": "斗图经典",
+    "tags": ["狗", "斜眼", "怀疑", "doge"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "cat-sunglasses",
+    "name": "墨镜酷猫",
+    "file": "/templates/cat-sunglasses.png",
+    "category": "可爱贴纸",
+    "tags": ["猫", "墨镜", "酷", "橘猫"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "bear-cheer",
+    "name": "欢呼小熊",
+    "file": "/templates/bear-cheer.png",
+    "category": "可爱贴纸",
+    "tags": ["熊", "开心", "欢呼", "庆祝"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "smile",
+    "name": "微笑黄豆",
+    "file": "/templates/smile.svg",
+    "category": "可爱贴纸",
+    "tags": ["微笑", "开心", "黄豆", "表情"],
+    "credit": "自制 SVG（本项目资产）"
+  },
+  {
+    "id": "heart-eyes",
+    "name": "爱心眼",
+    "file": "/templates/heart-eyes.svg",
+    "category": "可爱贴纸",
+    "tags": ["爱心", "喜欢", "花痴", "黄豆"],
+    "credit": "自制 SVG（本项目资产）"
+  },
+  {
+    "id": "hamster-angry",
+    "name": "生气仓鼠",
+    "file": "/templates/hamster-angry.png",
+    "category": "动物",
+    "tags": ["仓鼠", "生气", "鼓脸", "可爱"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "penguin-shock",
+    "name": "震惊企鹅",
+    "file": "/templates/penguin-shock.png",
+    "category": "动物",
+    "tags": ["企鹅", "震惊", "惊讶", "可爱"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "bunny-sweat",
+    "name": "无语兔兔",
+    "file": "/templates/bunny-sweat.png",
+    "category": "动物",
+    "tags": ["兔子", "无语", "流汗", "尴尬"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "frog-cry",
+    "name": "大哭青蛙",
+    "file": "/templates/frog-cry.png",
+    "category": "情绪",
+    "tags": ["青蛙", "哭", "伤心", "眼泪"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "angry",
+    "name": "怒火中烧",
+    "file": "/templates/angry.svg",
+    "category": "情绪",
+    "tags": ["生气", "愤怒", "火大", "黄豆"],
+    "credit": "自制 SVG（本项目资产）"
+  },
+  {
+    "id": "cry",
+    "name": "泪流满面",
+    "file": "/templates/cry.svg",
+    "category": "情绪",
+    "tags": ["哭", "流泪", "委屈", "黄豆"],
+    "credit": "自制 SVG（本项目资产）"
+  }
+]

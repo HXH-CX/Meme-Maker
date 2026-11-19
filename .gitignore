@@ -24,3 +24,7 @@ Thumbs.db
 coverage/
 .vite/
 *.tsbuildinfo
+
+# scratch assets (raw originals, verification screenshots)
+assets/
+vibe_images/
