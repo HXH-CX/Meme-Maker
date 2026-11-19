@@ -16,19 +16,19 @@
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
-    "id": "cat-sunglasses",
-    "name": "墨镜酷猫",
-    "file": "/templates/cat-sunglasses.png",
-    "category": "可爱贴纸",
-    "tags": ["猫", "墨镜", "酷", "橘猫"],
+    "id": "capybara-deadpan",
+    "name": "面瘫卡皮巴拉",
+    "file": "/templates/capybara-deadpan.png",
+    "category": "斗图经典",
+    "tags": ["卡皮巴拉", "水豚", "面瘫", "淡定", "无语"],
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
-    "id": "bear-cheer",
-    "name": "欢呼小熊",
-    "file": "/templates/bear-cheer.png",
-    "category": "可爱贴纸",
-    "tags": ["熊", "开心", "欢呼", "庆祝"],
+    "id": "horse-mask",
+    "name": "马头面具打工人",
+    "file": "/templates/horse-mask.png",
+    "category": "斗图经典",
+    "tags": ["马头", "面具", "打工人", "抽象", "上班"],
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
@@ -48,35 +48,35 @@
     "credit": "自制 SVG（本项目资产）"
   },
   {
-    "id": "hamster-angry",
-    "name": "生气仓鼠",
-    "file": "/templates/hamster-angry.png",
+    "id": "line-puppy",
+    "name": "线条小狗",
+    "file": "/templates/line-puppy.png",
     "category": "动物",
-    "tags": ["仓鼠", "生气", "鼓脸", "可爱"],
+    "tags": ["线条小狗", "狗", "简笔画", "面瘫"],
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
-    "id": "penguin-shock",
-    "name": "震惊企鹅",
-    "file": "/templates/penguin-shock.png",
+    "id": "lying-flat-cat",
+    "name": "躺平橘猫",
+    "file": "/templates/lying-flat-cat.png",
     "category": "动物",
-    "tags": ["企鹅", "震惊", "惊讶", "可爱"],
+    "tags": ["猫", "躺平", "摆烂", "累", "橘猫"],
     "credit": "自制（AI 生成，本项目资产）"
   },
   {
-    "id": "bunny-sweat",
-    "name": "无语兔兔",
-    "file": "/templates/bunny-sweat.png",
-    "category": "动物",
-    "tags": ["兔子", "无语", "流汗", "尴尬"],
-    "credit": "自制（AI 生成，本项目资产）"
-  },
-  {
-    "id": "frog-cry",
-    "name": "大哭青蛙",
-    "file": "/templates/frog-cry.png",
+    "id": "crying-cat",
+    "name": "流泪猫猫头",
+    "file": "/templates/crying-cat.png",
     "category": "情绪",
-    "tags": ["青蛙", "哭", "伤心", "眼泪"],
+    "tags": ["猫", "哭", "流泪", "委屈", "猫猫头"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "stickman-rage",
+    "name": "暴走简笔画",
+    "file": "/templates/stickman-rage.png",
+    "category": "情绪",
+    "tags": ["简笔画", "暴走", "愤怒", "抽象", "小人"],
     "credit": "自制（AI 生成，本项目资产）"
   },
   {

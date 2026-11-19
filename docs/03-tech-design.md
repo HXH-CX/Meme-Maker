@@ -133,7 +133,25 @@ DashScope **原生异步任务**接口（实测 compatible-mode 无 images 路�
 - 恢复：历史条点击 → `/editor` state `{source:{kind:'upload',dataUrl:base}, layers}`，编辑器初始 layers 取自 state。
 - 缩略图分辨率与导出画布一致（短边 512），重编辑不损失导出精度。
 
-### 5.5 模板素材管线
+### 5.5 AI 形象变体（v1.2）
+
+模型实测结论：qwen-image-edit 系列在本账号"Model not exist"；`wanx2.1-imageedit`
+（image2image/image-synthesis，异步）**接受 base64 dataURL 作为 base_image_url**，约 5s 出图。
+
+```
+前端 上传参考图 → 客户端缩至短边 1024 JPEG dataURL
+     POST /api/variations {image, prompt?}（路由 body 上限 8mb）
+后端 校验 dataURL 格式/≤6MB base64/prompt≤200 → 3 路并行 submitEditTask
+     预设指令：风格/动作/表情各一 + 用户补充要求
+     ← 202 {tasks:[{taskId, dimension}×3]}
+前端 复用 GET /api/generate/:taskId 轮询全部任务（90s 总超时）
+     → 3 缩略图（带维度标签）→ 各自加字进编辑器
+```
+
+- 参考图仅内存转发厂商，不落盘；面板常驻隐私告知。
+- 限流与错误分类复用 5.3；单路失败不影响其余两路展示。
+
+### 5.6 模板素材管线
 
 - `manifest.json` 为唯一模板数据源，新增模板 = 放图 + 加一条记录。
 - 首批 ≥12 张：开源可商用素材 + 通义万相自制（M3 联调时顺便产出），每张记录 `credit`。

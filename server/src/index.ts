@@ -1,9 +1,10 @@
 import 'dotenv/config'
 import express from 'express'
-import { fetchImage, getTask, isAllowedImageUrl, submitTask } from './dashscope'
-import { STYLE_PREFIX, validateGenerateBody } from './validate'
+import { fetchImage, getTask, isAllowedImageUrl, submitEditTask, submitTask } from './dashscope'
+import { STYLE_PREFIX, validateGenerateBody, validateVariationBody, VARIATION_DIMENSIONS, VARIATION_PRESETS } from './validate'
 
 const app = express()
+app.use('/api/variations', express.json({ limit: '8mb' }))
 app.use(express.json({ limit: '16kb' }))
 
 const KEY = process.env.DASHSCOPE_API_KEY ?? ''
@@ -51,6 +52,37 @@ app.post('/api/generate', async (req, res) => {
   try {
     const taskId = await submitTask(KEY, STYLE_PREFIX[parsed.style] + parsed.prompt)
     res.status(202).json({ taskId })
+  } catch (e) {
+    const err = e as { code?: string; message?: string }
+    res.status(502).json({ code: err.code ?? 'SUBMIT_FAILED', message: failCode(err.code, err.message) })
+  }
+})
+
+app.post('/api/variations', async (req, res) => {
+  if (!KEY) {
+    res.status(503).json({ code: 'AI_DISABLED', message: 'AI 功能未启用' })
+    return
+  }
+  if (rateLimited(req.ip ?? 'unknown')) {
+    res.status(429).json({ code: 'RATE_LIMITED', message: '请求过频，请一分钟后再试' })
+    return
+  }
+  const parsed = validateVariationBody(req.body)
+  if ('error' in parsed) {
+    res.status(400).json({ code: 'BAD_REQUEST', message: parsed.error })
+    return
+  }
+  try {
+    const taskIds = await Promise.all(
+      VARIATION_DIMENSIONS.map((dim) =>
+        submitEditTask(
+          KEY,
+          parsed.image,
+          VARIATION_PRESETS[dim] + (parsed.prompt ? `；补充要求：${parsed.prompt}` : ''),
+        ),
+      ),
+    )
+    res.status(202).json({ tasks: taskIds.map((id, i) => ({ taskId: id, dimension: VARIATION_DIMENSIONS[i] })) })
   } catch (e) {
     const err = e as { code?: string; message?: string }
     res.status(502).json({ code: err.code ?? 'SUBMIT_FAILED', message: failCode(err.code, err.message) })

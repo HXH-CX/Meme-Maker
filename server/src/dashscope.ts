@@ -45,6 +45,34 @@ export async function submitTask(key: string, prompt: string): Promise<string> {
   return data.output.task_id
 }
 
+export async function submitEditTask(
+  key: string,
+  imageDataUrl: string,
+  instruction: string,
+): Promise<string> {
+  const res = await fetch(`${baseUrl()}/services/aigc/image2image/image-synthesis`, {
+    method: 'POST',
+    headers: headers(key, true),
+    body: JSON.stringify({
+      model: 'wanx2.1-imageedit',
+      input: { function: 'description_edit', base_image_url: imageDataUrl, prompt: instruction },
+      parameters: { n: 1 },
+    }),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
+  })
+  const data = (await res.json()) as {
+    output?: { task_id?: string }
+    code?: string
+    message?: string
+  }
+  if (!res.ok || !data.output?.task_id) {
+    throw Object.assign(new Error(data.message ?? '提交变体任务失败'), {
+      code: data.code ?? 'SubmitFailed',
+    })
+  }
+  return data.output.task_id
+}
+
 export async function getTask(key: string, taskId: string): Promise<DashScopeTask> {
   const res = await fetch(`${baseUrl()}/tasks/${taskId}`, {
     headers: headers(key),

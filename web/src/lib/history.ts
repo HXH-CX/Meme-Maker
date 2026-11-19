@@ -50,11 +50,15 @@ export function clearHistory() {
   localStorage.removeItem(KEY)
 }
 
-export function makeBaseDataUrl(image: HTMLImageElement): string {
-  const scale = 512 / Math.min(image.naturalWidth, image.naturalHeight)
+export function makeScaledDataUrl(image: HTMLImageElement, shortSide: number): string {
+  const scale = shortSide / Math.min(image.naturalWidth, image.naturalHeight)
   const canvas = document.createElement('canvas')
   canvas.width = Math.round(image.naturalWidth * scale)
   canvas.height = Math.round(image.naturalHeight * scale)
   canvas.getContext('2d')!.drawImage(image, 0, 0, canvas.width, canvas.height)
   return canvas.toDataURL('image/jpeg', 0.85)
+}
+
+export function makeBaseDataUrl(image: HTMLImageElement): string {
+  return makeScaledDataUrl(image, 512)
 }

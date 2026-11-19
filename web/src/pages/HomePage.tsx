@@ -6,6 +6,7 @@ import TemplateGrid from '../components/TemplateGrid'
 import UploadTile from '../components/UploadTile'
 import AiPanel from '../components/AiPanel'
 import HistoryStrip from '../components/HistoryStrip'
+import VariationsPanel from '../components/VariationsPanel'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -90,6 +91,8 @@ export default function HomePage() {
         </div>
 
         <AiPanel />
+
+        <VariationsPanel />
 
         <HistoryStrip />
 
