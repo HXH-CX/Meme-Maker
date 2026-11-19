@@ -94,5 +94,85 @@
     "category": "情绪",
     "tags": ["哭", "流泪", "委屈", "黄豆"],
     "credit": "自制 SVG（本项目资产）"
+  },
+  {
+    "id": "panda-confused",
+    "name": "熊猫头疑惑",
+    "file": "/templates/panda-confused.png",
+    "category": "斗图经典",
+    "tags": ["熊猫", "疑惑", "问号", "不解", "黑白"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "shiba-smile",
+    "name": "柴犬礼貌微笑",
+    "file": "/templates/shiba-smile.png",
+    "category": "斗图经典",
+    "tags": ["柴犬", "微笑", "礼貌", "呵呵", "doge"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "horse-tired",
+    "name": "牛马打工人",
+    "file": "/templates/horse-tired.png",
+    "category": "斗图经典",
+    "tags": ["牛马", "打工人", "累", "黑眼圈", "上班"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "monkey-worker",
+    "name": "吗喽上班",
+    "file": "/templates/monkey-worker.png",
+    "category": "斗图经典",
+    "tags": ["吗喽", "猴子", "打工人", "上班", "面瘫"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "smirk-sideeye",
+    "name": "斜眼笑",
+    "file": "/templates/smirk-sideeye.svg",
+    "category": "可爱贴纸",
+    "tags": ["斜眼", "笑", "滑稽", "嘲讽", "黄豆"],
+    "credit": "自制 SVG（本项目资产）"
+  },
+  {
+    "id": "sweat-smile",
+    "name": "流汗微笑",
+    "file": "/templates/sweat-smile.svg",
+    "category": "可爱贴纸",
+    "tags": ["流汗", "尴尬", "微笑", "黄豆", "无语"],
+    "credit": "自制 SVG（本项目资产）"
+  },
+  {
+    "id": "capybara-onsen",
+    "name": "卡皮巴拉泡汤",
+    "file": "/templates/capybara-onsen.png",
+    "category": "动物",
+    "tags": ["卡皮巴拉", "水豚", "温泉", "淡定", "柚子"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "duck-confused",
+    "name": "抱头懵鸭",
+    "file": "/templates/duck-confused.png",
+    "category": "动物",
+    "tags": ["鸭子", "懵", "抱头", "困惑", "慌张"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "rat-sad",
+    "name": "鼠鼠我啊",
+    "file": "/templates/rat-sad.png",
+    "category": "动物",
+    "tags": ["鼠鼠", "老鼠", "委屈", "自嘲", "卑微"],
+    "credit": "自制（AI 生成，本项目资产）"
+  },
+  {
+    "id": "clown-sad",
+    "name": "小丑竟是我自己",
+    "file": "/templates/clown-sad.png",
+    "category": "情绪",
+    "tags": ["小丑", "自嘲", "流泪", "微笑", "破防"],
+    "credit": "自制（AI 生成，本项目资产）"
   }
 ]
