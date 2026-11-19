@@ -1,6 +1,9 @@
-const BASE = 'https://dashscope.aliyuncs.com/api/v1'
 const MODEL = 'wanx2.1-t2i-turbo'
-const TIMEOUT_MS = 15000
+const TIMEOUT_MS = 15_000
+
+export function baseUrl(): string {
+  return process.env.DASHSCOPE_BASE_URL ?? 'https://dashscope.aliyuncs.com/api/v1'
+}
 
 function headers(key: string, async = false): Record<string, string> {
   const h: Record<string, string> = {
@@ -19,7 +22,7 @@ export interface DashScopeTask {
 }
 
 export async function submitTask(key: string, prompt: string): Promise<string> {
-  const res = await fetch(`${BASE}/services/aigc/text2image/image-synthesis`, {
+  const res = await fetch(`${baseUrl()}/services/aigc/text2image/image-synthesis`, {
     method: 'POST',
     headers: headers(key, true),
     body: JSON.stringify({
@@ -43,7 +46,7 @@ export async function submitTask(key: string, prompt: string): Promise<string> {
 }
 
 export async function getTask(key: string, taskId: string): Promise<DashScopeTask> {
-  const res = await fetch(`${BASE}/tasks/${taskId}`, {
+  const res = await fetch(`${baseUrl()}/tasks/${taskId}`, {
     headers: headers(key),
     signal: AbortSignal.timeout(TIMEOUT_MS),
   })

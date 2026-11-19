@@ -30,7 +30,7 @@ Express 小后端（仅 AI 代理，无数据库）
 | 图像渲染 | 原生 Canvas 2D API | 加字/描边/换行/导出全可控，零依赖 |
 | 状态 | React useState/useReducer + URL 参数 | 无全局状态库必要 |
 | 后端 | Node.js + Express + TypeScript（tsx 运行） | 单职责 AI 代理 |
-| AI | 通义万相 `wanx2.1-t2i-turbo`（DashScope） | 已确认；turbo 快且便宜，适合斗图场景 |
+| AI | 通义万相 `wanx2.1-t2i-turbo`（DashScope 原生异步任务接口） | 已确认；turbo 快且便宜，适合斗图场景 |
 | 测试 | Vitest（纯逻辑单测）+ 浏览器手动验证 | 文字换行/缩放是核心纯函数，值得单测 |
 
 ## 3. 目录结构
@@ -105,23 +105,25 @@ type MemeSource =
 
 ### 5.3 AI 生成（M3）
 
-DashScope 文生图是**异步任务**接口，流程：
+DashScope **原生异步任务**接口（实测 compatible-mode 无 images 路由，故不用兼容模式）。
+端点根由 `DASHSCOPE_BASE_URL` 配置（默认 `https://dashscope.aliyuncs.com/api/v1`，
+也可填百炼工作空间地址的 `/api/v1` 根）：
 
 ```
 前端 POST /api/generate {prompt, style}
-后端 校验 prompt(≤200字) → 拼风格前缀 → DashScope 提交任务(异步头)
+后端 校验 prompt(≤200字)/style 枚举 → 拼风格前缀 → 提交任务(X-DashScope-Async)
      ← 202 {taskId}
 前端 每 2s GET /api/generate/:taskId
-后端 查 DashScope 任务状态 → {status: pending|succeeded|failed, imageUrl?}
-前端 succeeded → 图片转 dataURL(经后端代理下载，避免 CORS) → 进入编辑器
+后端 查任务状态 → {status: pending|succeeded|failed, imageUrl?}
+前端 succeeded → 图片经 /api/image-proxy 转同源 → 进入编辑器加字 / 换一张
 ```
 
 - 风格预设映射为 prompt 前缀（如"黑白暴走漫画风格，粗线条，表情包底图，无文字："）。
-- 超时：前端 60s 停止轮询并提示重试；后端单次 DashScope 请求 15s 超时。
+- 超时：前端 60s 停止轮询并提示重试；后端单次上游请求 15s 超时。
 - 无 Key：`/api/generate` 返回 503 `{code:'AI_DISABLED'}`，前端 AI 入口显示"未启用"。
 - 失败分类文案：审核拒绝 / 额度不足 / 网络超时，均提供"重试"。
-- 简易防护：按 IP 内存限流（如 10 次/分钟），防止本地误刷额度；不做持久化。
-- 生成图不落盘，仅内存/临时转发。
+- 简易防护：按 IP 内存限流（10 次/分钟）；不做持久化。
+- 图片代理白名单：仅 `https://*.aliyuncs.com`；生成图不落盘，仅内存转发。
 
 ### 5.4 模板素材管线
 
