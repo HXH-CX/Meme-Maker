@@ -152,7 +152,20 @@ DashScope **原生异步任务**接口（实测 compatible-mode 无 images 路�
 - 提交策略：3 路间隔 1.2s 串行提交（避免瞬时并发触发厂商 QPS 限流），任务在厂商侧并行执行；Throttling 类错误退避重试 2 次（2s/4s）。
 - 错误文案中文化（errors.ts）：限流/额度/审核分类提示，剥离厂商链接；限流与错误分类复用 5.3；单路失败不影响其余两路展示。
 
-### 5.6 模板素材管线
+### 5.6 Sites 适配层（代码已就绪，未部署）
+
+- `functions/`：单 `app` Edge Function（`index.ts` = `Deno.serve(handler)`），路由按路径后缀匹配
+  `/status | /generate[/:taskId] | /variations | /image-proxy`，不依赖网关物理函数名。
+- 核心三模块（dashscope/validate/errors）为 `server/src` 的打包副本：Deno/Node 双兼容
+  （env 读取 `Deno.env.get` 回退 `process.env`；图片转发改 Uint8Array），相对导入带扩展名。
+- Secret 名：`DASHSCOPE_API_KEY`、`DASHSCOPE_BASE_URL`（prepare 时经 `secretNames` 声明，设置录入）。
+- 前端 `VITE_API_BASE` 切换：默认 `/api`（本地 Express）；`--mode sites` 读 `web/.env.sites`
+  → `/functions/v1/app`；Vite 另代理该前缀到 127.0.0.1:8000 供本地 Functions 联调（`npm run dev:sites`）。
+- 本地验证：`npm run check:functions`（Node 类型剥离直调 handler，9 项含真实生成主流程）；
+  Deno 未安装故 `deno check` 未执行，部署运行时待发布后实测。
+- 限流为单 isolate 内存 best-effort；成本闸门（Sites DB 计数）仍待决策，见 05 方案 §3。
+
+### 5.7 模板素材管线
 
 - `manifest.json` 为唯一模板数据源，新增模板 = 放图 + 加一条记录。
 - 首批 ≥12 张：开源可商用素材 + 通义万相自制（M3 联调时顺便产出），每张记录 `credit`。

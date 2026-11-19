@@ -9,6 +9,8 @@
   "scripts": {
     "dev": "concurrently -n web,server -c yellow,blue \"npm run dev -w web\" \"npm run dev -w server\"",
     "dev:web": "npm run dev -w web",
+    "dev:sites": "concurrently -n fn,web -c blue,yellow \"node --env-file=server/.env dev/function-local-node.mjs\" \"npm run dev -w web -- --mode sites\"",
+    "check:functions": "node --env-file=server/.env dev/function-check.mjs",
     "test": "npm test -w web && npm test -w server",
     "build": "npm run build -w web && npm run build -w server"
   },

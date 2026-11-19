@@ -27,6 +27,8 @@
 npm install        # 根目录安装全部 workspace 依赖
 npm run dev        # 前端 5173 + 后端 3001（M3 起需要）
 npm run dev:web    # 仅前端（M1/M2 够用）
+npm run dev:sites  # Sites 模式联调：本地 Functions(8000) + 前端 sites mode
+npm run check:functions  # Functions handler 验证（含真实生成主流程）
 npm test           # vitest 单测
 npm run build      # tsc 类型检查 + vite build
 ```

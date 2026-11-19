@@ -1,5 +1,7 @@
 import type { AiStyle } from '../types'
 
+const BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? '/api'
+
 export interface GenerateTask {
   status: 'pending' | 'succeeded' | 'failed'
   imageUrl?: string
@@ -8,7 +10,7 @@ export interface GenerateTask {
 
 export async function fetchAiStatus(): Promise<boolean> {
   try {
-    const res = await fetch('/api/status')
+    const res = await fetch(`${BASE}/status`)
     if (!res.ok) return false
     const data = (await res.json()) as { aiEnabled?: boolean }
     return !!data.aiEnabled
@@ -18,7 +20,7 @@ export async function fetchAiStatus(): Promise<boolean> {
 }
 
 export async function startGeneration(prompt: string, style: AiStyle): Promise<string> {
-  const res = await fetch('/api/generate', {
+  const res = await fetch(`${BASE}/generate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ prompt, style }),
@@ -32,7 +34,7 @@ export async function pollGeneration(taskId: string, timeoutMs = 60_000): Promis
   const deadline = Date.now() + timeoutMs
   while (Date.now() < deadline) {
     await new Promise((r) => setTimeout(r, 2000))
-    const res = await fetch(`/api/generate/${taskId}`)
+    const res = await fetch(`${BASE}/generate/${taskId}`)
     const data = (await res.json()) as GenerateTask
     if (!res.ok) throw new Error(data.message ?? '查询生成状态失败')
     if (data.status !== 'pending') return data
@@ -46,7 +48,7 @@ export interface VariationTask {
 }
 
 export async function startVariations(image: string, prompt: string): Promise<VariationTask[]> {
-  const res = await fetch('/api/variations', {
+  const res = await fetch(`${BASE}/variations`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ image, prompt }),
@@ -66,7 +68,7 @@ export async function pollVariations(
   while (pending.size && Date.now() < deadline) {
     await new Promise((r) => setTimeout(r, 2000))
     for (const [taskId, task] of [...pending]) {
-      const res = await fetch(`/api/generate/${taskId}`)
+      const res = await fetch(`${BASE}/generate/${taskId}`)
       const data = (await res.json()) as GenerateTask
       if (!res.ok) throw new Error(data.message ?? '查询生成状态失败')
       if (data.status !== 'pending') {
@@ -80,5 +82,5 @@ export async function pollVariations(
 }
 
 export function proxiedImageUrl(url: string): string {
-  return `/api/image-proxy?url=${encodeURIComponent(url)}`
+  return `${BASE}/image-proxy?url=${encodeURIComponent(url)}`
 }
