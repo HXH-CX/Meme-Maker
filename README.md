@@ -14,6 +14,39 @@
 - **导出**：无水印 PNG 下载；一键复制到剪贴板（浏览器拒绝时自动降级下载）
 - **最近作品**：localStorage 历史，点缩略图带原文字配置重新编辑
 
+## 功能展示
+
+### 界面一览
+
+首页：模板库 / 上传入口 / AI 生成 / 最近作品
+
+![首页](docs/showcase/readme-home.png)
+
+编辑器：加字自动换行、反色描边，下载 PNG / 复制图片
+
+![编辑器](docs/showcase/readme-editor.png)
+
+### 原创模板（22 张，节选 8 张）
+
+| | | | |
+| --- | --- | --- | --- |
+| ![面瘫卡皮巴拉](web/public/templates/capybara-deadpan.png) | ![线条小狗](web/public/templates/line-puppy.png) | ![流泪猫猫头](web/public/templates/crying-cat.png) | ![马头面具打工人](web/public/templates/horse-mask.png) |
+| 面瘫卡皮巴拉 | 线条小狗 | 流泪猫猫头 | 马头面具打工人 |
+| ![尖叫土拨鼠](web/public/templates/marmot-scream.png) | ![小丑竟是我自己](web/public/templates/clown-sad.png) | ![村霸鹅追人](web/public/templates/goose-chase.png) | ![躺平橘猫](web/public/templates/lying-flat-cat.png) |
+| 尖叫土拨鼠 | 小丑竟是我自己 | 村霸鹅追人 | 躺平橘猫 |
+
+### AI 文生图底图
+
+输入描述词即可生成不存在的底图（通义万相 `wanx2.1-t2i-turbo`）：
+
+![AI 文生图示例：斗图漫画风橘猫](docs/showcase/ai-test.png)
+
+### AI 形象变体
+
+上传参考图，一次生成风格 / 动作 / 表情 3 张变体（`wanx2.1-imageedit`）。示例：给卡皮巴拉戴上墨镜——
+
+![AI 变体示例：戴墨镜的卡皮巴拉](docs/showcase/variation-test.png)
+
 ## 技术栈
 
 | 层 | 技术 |
